@@ -1,5 +1,0 @@
-<!DOCTYPE root [
-<!ELEMENT root EMPTY>
-<!ATTLIST root xmlns IDREF #IMPLIED>
-]>
-<root xmlns="http://example.com"/>

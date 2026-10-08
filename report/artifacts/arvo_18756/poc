@@ -1,6 +1,0 @@
-s = "a" * 100
-t = s[0, 100]
-s = nil
-GC.start
-t << "b"
-GC.start
