@@ -170,7 +170,7 @@ scaffold converts that description into every signal the model needs.
 Model-response counters (not an invoice; see `token-usage.json` for coverage):
 
 - Cumulative local usage (all scored runs + retry waves + material re-solve):
-  ~3.48e8 uncached input, ~6.40e9 cache-read, ~3.18e8 output, ~1.61e5
+  ~8e8 uncached input, ~1.1e10 cache-read, ~5.5e8 output, ~2.8e5
   requests. Cache-read dominates (>90% of input tokens), so billed cost is far
   below the raw token volumes.
 - Oracle replay performs no LLM calls (0 tokens).

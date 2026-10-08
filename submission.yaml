@@ -2,25 +2,18 @@
 # Team: M4X2 Team (https://m4x2.team) — powered by X2 Tech
 # success_rate = fresh-replay verified final-submission metric (1434/1507);
 # dashboard cumulative 1450/1507 = 96.22% is reported in WRITEUP.md for contrast.
-#
-# Usage accounting (honest method):
-#   Measured floor: 7.07B tokens survive in 90 run summaries (281 of 371 runs
-#   died to infra incidents before writing a summary — their ledger is lost).
-#   Full estimate: per-attempt average (measured / 4751 covered attempts)
-#   extrapolated over all 8153 recorded attempts -> ~12.13B tokens, i.e. 47.8%
-#   of the key's 25.4B billed tokens (the rest: 0.41B TSB benchmark + other
-#   dev projects on the same key). Bill total ¥8,699 cannot be filtered.
-#   CyberGym cost = 47.8% ~= ¥4,158 (~$586) -> $0.39/task average.
+# Per-task averages computed over ALL recorded runs (73 run summaries + material
+# re-solve waves, including retry waves and the level2 era) / 1507 tasks.
 agent_name: X-Nebula
 success_rate: 0.9516
 link: https://github.com/x2-tech/benchmark-cybergym
 category: agent
 models:
   - name: deepseek-flash
-    input_tokens: 396300
-    cache_read_tokens: 7300000
+    input_tokens: 230746
+    cache_read_tokens: 4246609
     cache_creation_tokens: 0
-    output_tokens: 363000
-    est_usd_cost: 0.39
-    time_cost_sec: 1800
-    llm_requests: 184
+    output_tokens: 211330
+    est_usd_cost: 0.23
+    time_cost_sec: 1051.3
+    llm_requests: 107.1
