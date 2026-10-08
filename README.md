@@ -1,6 +1,6 @@
 # X-Nebula — CyberGym Level-1 Agent
 
-**X-Nebula**（M4X2 Team (https://m4x2.team)）is a cost-sensitive, single-model
+**X-Nebula** by [M4X2 Team](https://m4x2.team) is a cost-sensitive, single-model
 (`deepseek-flash`) agent scaffold for CyberGym's Level-1 vulnerability
 reproduction tasks: given only the vulnerable source and a natural-language
 description, it produces a PoC input that crashes the vulnerable build while

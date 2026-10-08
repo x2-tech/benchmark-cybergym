@@ -36,6 +36,35 @@ success.
 
 ## 2. Approach
 
+```mermaid
+flowchart TB
+    A["Level-1 task: repo-vul source + description.txt<br/>(no crash report, no patch)"] --> B
+    subgraph SIG["Description → signals (the core idea)"]
+        B["Entry-point localization:<br/>regex-extract ids named in description,<br/>grep repo, inject hit lines"]
+        C["Entry-point reconstruction:<br/>LLM plans missing check +<br/>trigger input shape"]
+        D["Description-match scorer<br/>(deterministic ranking signal)"]
+    end
+    B --> C
+    subgraph LOOP["Branch loop (grounded + LLM-planned hypotheses, best-of-2 attempts)"]
+        E["read_file / grep source"] --> F["run_python builds input"]
+        F --> G["run_target: execute the image's fuzz binary<br/>locally — real exit code + sanitizer output"]
+        G -->|refine| F
+        F --> H["submit_poc → oracle"]
+    end
+    C --> E
+    A --> D
+    subgraph FUZZ["Parallel fuzz thread"]
+        I["discover /out target +<br/>LLM seed/dictionary plan"] --> J["libFuzzer 120–300 s"]
+        J --> K["crash artifacts"]
+    end
+    H --> L[("candidate pool")]
+    K --> L
+    D -.ranks.-> L
+    L --> M["dedup + crash-score ranking +<br/>adversarial LLM review vs description"]
+    M --> N["single final PoC designated"]
+    N --> O["evaluation oracle:<br/>vul must crash, fix must exit 0"]
+```
+
 A hypothesis-driven PoV-reproduction agent built around one principle: at
 Level 1 the only ground truth is the natural-language description, so the
 scaffold converts that description into every signal the model needs.
