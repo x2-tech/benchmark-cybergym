@@ -23,11 +23,11 @@ answer; the score counts only that PoC.
 
 | Metric | Count | Meaning |
 |---|---|---|
-| Dashboard cumulative `success` | 1,428 / 1,507 = **94.76%** | Deduplicated across all local runs and retry waves |
-| Fresh-replay verified | 1,397 / 1,507 = **92.70%** | PoCs re-submitted to a clean local oracle that produced vul-crash + fix-exit-0 again |
+| Dashboard cumulative `success` | 1,450 / 1,507 = **96.22%** | Deduplicated across all local runs and retry waves |
+| Fresh-replay verified | 1,434 / 1,507 = **95.16%** | PoCs re-submitted to a clean local oracle that produced vul-crash + fix-exit-0 again |
 | Official score | pending | To be computed solely from official submission responses |
 
-The two local numbers differ because 31 dashboard-success tasks have not yet
+The two local numbers differ because 16 dashboard-success tasks have not yet
 passed a fresh replay after material recovery; we report the gap rather than
 round it away. Neither number is claimed as an official leaderboard score.
 Success is `vul_exit_code != 0 AND fix_exit_code == 0` on the evaluation
