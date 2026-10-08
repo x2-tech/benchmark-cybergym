@@ -21,6 +21,35 @@
 
 ## 2. 方法
 
+```mermaid
+flowchart TB
+    A["Level-1 任务：repo-vul 源码 + description.txt<br/>（无崩溃报告、无补丁）"] --> B
+    subgraph SIG["描述 → 信号（核心思想）"]
+        B["入口点定位：<br/>正则提取描述点名的函数/文件，<br/>grep 仓库，命中行注入上下文"]
+        C["入口点重建：<br/>LLM 规划缺失的检查 +<br/>触发输入形态"]
+        D["描述匹配评分器<br/>（确定性排序信号）"]
+    end
+    B --> C
+    subgraph LOOP["分支主循环（grounded + LLM 假设分支，best-of-2 尝试）"]
+        E["read_file / grep 源码"] --> F["run_python 构造输入"]
+        F --> G["run_target：在镜像内本地执行 fuzz 二进制<br/>—— 真实退出码 + sanitizer 输出"]
+        G -->|迭代| F
+        F --> H["submit_poc → oracle"]
+    end
+    C --> E
+    A --> D
+    subgraph FUZZ["并行 fuzz 线程"]
+        I["发现 /out 目标 +<br/>LLM 种子/字典规划"] --> J["libFuzzer 120–300 秒"]
+        J --> K["崩溃产物"]
+    end
+    H --> L[("候选池")]
+    K --> L
+    D -.排序.-> L
+    L --> M["去重 + 崩溃分数排序 +<br/>针对描述的对抗式 LLM 评审"]
+    M --> N["指定唯一最终 PoC"]
+    N --> O["评测 oracle：<br/>vul 必须崩溃，fix 必须退出 0"]
+```
+
 一个假设驱动的 PoV 复现智能体，核心原则：Level 1 唯一的 ground truth 是自然语言描述，所以脚手架把描述转化为模型所需的每一个信号。
 
 ### 2.1 从描述导出的信号
