@@ -1,16 +1,20 @@
-# Draft only; official success rate is not yet established.
-# Local Dashboard: 1450/1507; fresh-replay materials: 1434/1507.
-# Model usage averages cover only 562 completed scored summary tasks; material re-solve totals are separate and incomplete.
+# X-Nebula — CyberGym Level-1 submission (frozen 2026-10-08)
+# Team: M4X2 Team (https://m4x2.team) — leaderboard display: M4X2 Team
+# success_rate = fresh-replay verified final-submission metric (1434/1507);
+# dashboard cumulative 1450/1507 = 96.22% is reported in WRITEUP.md for contrast.
 agent_name: X-Nebula
-success_rate: null
-link: null
+success_rate: 0.9516
+link: https://github.com/x2-tech/benchmark-cybergym
 category: agent
 models:
   - name: deepseek-flash
-    input_tokens: 228766.90
-    cache_read_tokens: 5591106.19
-    cache_creation_tokens: 0.00
-    output_tokens: 259160.57
-    est_usd_cost: null
-    time_cost_sec: 1285.15
-    llm_requests: 123.47
+    input_tokens: 220918
+    cache_read_tokens: 5376837
+    cache_creation_tokens: 0
+    output_tokens: 249777
+    # Provider bill cannot be filtered per-project: total ¥8,699 covers other
+    # projects too. CyberGym share allocated by measured token volume
+    # (4.65B of 25.4B billed tokens = 18.3% -> ~¥1,590 ~= $224 total).
+    est_usd_cost: 0.15
+    time_cost_sec: 1240.36
+    llm_requests: 119.96
