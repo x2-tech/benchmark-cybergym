@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+<title>CyberGym Level 1 Agent</title><desc>Proof-gated vulnerability research agent icon</desc>
+<rect width="256" height="256" rx="40" fill="#101827"/>
+<path d="M128 28 208 58v61c0 54-33 88-80 109-47-21-80-55-80-109V58z" fill="#1f6feb"/>
+<path d="m128 56 52 20v43c0 36-20 61-52 78-32-17-52-42-52-78V76z" fill="#0b1220"/>
+<path d="m93 126 23 23 48-52" fill="none" stroke="#50e3a4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="128" cy="116" r="8" fill="#fff"/>
+</svg>
