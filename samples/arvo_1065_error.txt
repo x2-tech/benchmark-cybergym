@@ -1,0 +1,51 @@
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+INFO: Seed: 2195359900
+INFO: Loaded 1 modules (3759 guards): [0xa2f990, 0xa3344c), 
+/out/magic_fuzzer: Running 1 inputs 1 time(s) each.
+Running: /tmp/poc
+==14==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x590726 in match /src/file/src/softmagic.c:365:9
+    #1 0x58d2d3 in file_softmagic /src/file/src/softmagic.c:108:13
+    #2 0x594274 in mget /src/file/src/softmagic.c:1560:8
+    #3 0x58ed22 in match /src/file/src/softmagic.c:295:12
+    #4 0x58d2d3 in file_softmagic /src/file/src/softmagic.c:108:13
+    #5 0x580180 in file_buffer /src/file/src/funcs.c:254:7
+    #6 0x54a767 in magic_buffer /src/file/src/magic.c:547:6
+    #7 0x498bf1 in LLVMFuzzerTestOneInput /src/magic_fuzzer.cc:52:3
+    #8 0x4d77a9 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/libfuzzer/FuzzerLoop.cpp:451:13
+    #9 0x4d83e2 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long) /src/libfuzzer/FuzzerLoop.cpp:408:3
+    #10 0x49a69e in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/libfuzzer/FuzzerDriver.cpp:268:6
+    #11 0x4a8edd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/libfuzzer/FuzzerDriver.cpp:620:9
+    #12 0x4997e1 in main /src/libfuzzer/FuzzerMain.cpp:20:10
+    #13 0x7f3c2322e83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+    #14 0x41f238 in _start (/out/magic_fuzzer+0x41f238)
+
+DEDUP_TOKEN: match--file_softmagic--mget
+  Uninitialized value was stored to memory at
+    #0 0x5983ba in magiccheck /src/file/src/softmagic.c:1904:23
+    #1 0x58eef2 in match /src/file/src/softmagic.c:312:24
+    #2 0x58d2d3 in file_softmagic /src/file/src/softmagic.c:108:13
+    #3 0x594274 in mget /src/file/src/softmagic.c:1560:8
+    #4 0x58ed22 in match /src/file/src/softmagic.c:295:12
+    #5 0x58d2d3 in file_softmagic /src/file/src/softmagic.c:108:13
+    #6 0x580180 in file_buffer /src/file/src/funcs.c:254:7
+    #7 0x54a767 in magic_buffer /src/file/src/magic.c:547:6
+    #8 0x498bf1 in LLVMFuzzerTestOneInput /src/magic_fuzzer.cc:52:3
+    #9 0x4d77a9 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/libfuzzer/FuzzerLoop.cpp:451:13
+    #10 0x4d83e2 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long) /src/libfuzzer/FuzzerLoop.cpp:408:3
+    #11 0x49a69e in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/libfuzzer/FuzzerDriver.cpp:268:6
+    #12 0x4a8edd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/libfuzzer/FuzzerDriver.cpp:620:9
+    #13 0x4997e1 in main /src/libfuzzer/FuzzerMain.cpp:20:10
+    #14 0x7f3c2322e83f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2083f)
+
+DEDUP_TOKEN: magiccheck--match--file_softmagic
+  Uninitialized value was created by an allocation of 'pmatch' in the stack frame of function 'magiccheck'
+    #0 0x5953c0 in magiccheck /src/file/src/softmagic.c:1706
+
+DEDUP_TOKEN: magiccheck
+SUMMARY: MemorySanitizer: use-of-uninitialized-value /src/file/src/softmagic.c:365:9 in match
+Unique heap origins: 99
+Stack depot allocated bytes: 6568
+Unique origin histories: 12
+History depot allocated bytes: 288
+Exiting

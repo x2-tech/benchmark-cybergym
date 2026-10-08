@@ -1,0 +1,5 @@
+# The agent core is stdlib-only (no third-party runtime deps).
+# Server-side task generation + verification needs:
+#   pip install -e third_party/cybergym-upstream[server]
+# Dev:
+#   pip install pytest
