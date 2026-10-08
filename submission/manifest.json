@@ -18768,18 +18768,18 @@
     "active_or_missing_summaries_not_included": true,
     "averages_over_summary_tasks": {
       "cache_creation_tokens": 0.0,
-      "cache_read_tokens": 5561450.579710145,
-      "input_tokens": 227728.49456521738,
-      "llm_requests": 122.98188405797102,
-      "output_tokens": 257415.85688405798,
-      "time_cost_sec": 1276.7157608695657
+      "cache_read_tokens": 5591106.192170818,
+      "input_tokens": 228766.89857651247,
+      "llm_requests": 123.46797153024912,
+      "output_tokens": 259160.56583629892,
+      "time_cost_sec": 1285.1450177935947
     },
     "combined_recorded_totals": {
-      "cache_read_tokens": 3938670924.0,
-      "input_tokens": 155710277.0,
-      "llm_requests": 85473.0,
-      "output_tokens": 171312771.0,
-      "time_cost_sec": 853812.7000000002
+      "cache_read_tokens": 4010951884.0,
+      "input_tokens": 158571145.0,
+      "llm_requests": 86976.0,
+      "output_tokens": 174867456.0,
+      "time_cost_sec": 871317.1000000002
     },
     "invoice": null,
     "material_re_solve_recorded_totals": {
@@ -18798,14 +18798,14 @@
     "replay_llm_tokens": 0,
     "reported_totals": {
       "cache_creation_tokens": 0.0,
-      "cache_read_tokens": 3069920720.0,
-      "input_tokens": 125706129.0,
-      "llm_requests": 67886.0,
-      "output_tokens": 142093553.0,
-      "time_cost_sec": 704747.1000000002
+      "cache_read_tokens": 3142201680.0,
+      "input_tokens": 128566997.0,
+      "llm_requests": 69389.0,
+      "output_tokens": 145648238.0,
+      "time_cost_sec": 722251.5000000002
     },
-    "summary_files": 57,
-    "summary_task_denominator": 552,
+    "summary_files": 58,
+    "summary_task_denominator": 562,
     "usage_files": [
       "level1-balance-retry-20260929-s0",
       "level1-balance-retry-20260929-s1",
@@ -18837,6 +18837,7 @@
       "level1-pool-100717_8-s3",
       "level1-pool-100717_8-s4",
       "level1-pool-100717_8-s5",
+      "level1-pool-100717_8-s6",
       "level1-pool-100717_8-s7",
       "level1-rc-20260929-v3-s0",
       "level1-smoke",
