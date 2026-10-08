@@ -1,6 +1,6 @@
 # CyberGym Level-1 Agent — Agent Scaffold Writeup
 
-**Agent:** `cybergym-level1-agent-rc-20260929`
+**Agent:** `X-Nebula`
 **Model:** DeepSeek `deepseek-flash` (single model; planner, branch loops, and
 review all use the same model)
 **Category:** agent (cost-sensitive scaffold, not a raw model evaluation)

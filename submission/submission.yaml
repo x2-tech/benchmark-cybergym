@@ -1,0 +1,16 @@
+# Draft only; official success rate is not yet established.
+# Local Dashboard: 1449/1507; fresh-replay materials: 1433/1507.
+# Model usage averages cover only 562 completed scored summary tasks; material re-solve totals are separate and incomplete.
+agent_name: X-Nebula
+success_rate: null
+link: null
+category: agent
+models:
+  - name: deepseek-flash
+    input_tokens: 228766.90
+    cache_read_tokens: 5591106.19
+    cache_creation_tokens: 0.00
+    output_tokens: 259160.57
+    est_usd_cost: null
+    time_cost_sec: 1285.15
+    llm_requests: 123.47

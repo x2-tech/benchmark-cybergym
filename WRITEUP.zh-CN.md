@@ -1,6 +1,6 @@
 # CyberGym Level-1 智能体 —— Agent 脚手架技术报告（中文版）
 
-**智能体名称：** `cybergym-level1-agent-rc-20260929`
+**智能体名称：** `X-Nebula`
 **模型：** DeepSeek `deepseek-flash`（单一模型：规划器、分支主循环、评审均使用同一模型）
 **类别：** agent（成本敏感型脚手架，非纯模型评测）
 **评测难度：** Level 1（仅 repo-vul 源码 + description.txt —— 无崩溃报告、无补丁），即官方榜单级别。
