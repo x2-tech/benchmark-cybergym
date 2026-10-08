@@ -1,0 +1,1 @@
+A bug in glibc/regex/msan causes regexec to return 0 but not initialize pmatch.

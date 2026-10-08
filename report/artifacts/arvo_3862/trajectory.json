@@ -1,0 +1,188 @@
+[
+ {
+  "step": 1,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe.c",
+   "offset": 900,
+   "limit": 150
+  },
+  "result": "<file yara/libyara/modules/pe.c lines 900-1050>\n900:       imported_dll = (IMPORTED_DLL*) yr_calloc(1, sizeof(IMPORTED_DLL));\n901: \n902:       if (imported_dll != NULL)\n903:       {\n904:         IMPORT_EXPORT_FUNCTION* functions = pe_parse_import_descriptor(\n905:             pe, imports, dll_name);\n906: \n907:         if (functions != NULL)\n908:         {\n909:           imported_dll->name = yr_strdup(dll_name);;\n910:           imported_dll->functions = functions;\n911:           imported_dll->next"
+ },
+ {
+  "step": 1,
+  "tool": "grep",
+  "args": {
+   "pattern": "pe_parse_exports"
+  },
+  "result": "<grep 'pe_parse_exports': 2 matches>\nyara/libyara/modules/pe.c:941: IMPORT_EXPORT_FUNCTION* pe_parse_exports(\nyara/libyara/modules/pe.c:2620: pe->exported_functions = pe_parse_exports(pe);"
+ },
+ {
+  "step": 2,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe.c",
+   "offset": 1,
+   "limit": 120
+  },
+  "result": "<file yara/libyara/modules/pe.c lines 1-121>\n1: /*\n2: Copyright (c) 2014. The YARA Authors. All Rights Reserved.\n3: \n4: Redistribution and use in source and binary forms, with or without modification,\n5: are permitted provided that the following conditions are met:\n6: \n7: 1. Redistributions of source code must retain the above copyright notice, this\n8: list of conditions and the following disclaimer.\n9: \n10: 2. Redistributions in binary form must reproduce the above copyright notice,\n11: this li"
+ },
+ {
+  "step": 2,
+  "tool": "grep",
+  "args": {
+   "pattern": "pe_rva_to_offset|struct_fits_in_pe|MAX_PE_EXPORTS"
+  },
+  "result": "<grep 'pe_rva_to_offset|struct_fits_in_pe|MAX_PE_EXPORTS': 44 matches>\nyara/libyara/exefiles.c:92: uint64_t yr_pe_rva_to_offset(\nyara/libyara/exefiles.c:359: return yr_pe_rva_to_offset(\nyara/libyara/modules/pe.c:91: #define MAX_PE_EXPORTS               65535\nyara/libyara/modules/pe.c:328: if (!struct_fits_in_pe(pe, entry, IMAGE_RESOURCE_DIRECTORY_ENTRY))\nyara/libyara/modules/pe.c:355: if (struct_fits_in_pe(pe, directory, IMAGE_RESOURCE_DIRECTORY))\nyara/libyara/modules/pe.c:381: if (struct_fits_i"
+ },
+ {
+  "step": 3,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe_utils.c",
+   "offset": 1,
+   "limit": 200
+  },
+  "result": "<file yara/libyara/modules/pe_utils.c lines 1-201>\n1: /*\n2: Copyright (c) 2014-2015. The YARA Authors. All Rights Reserved.\n3: \n4: Redistribution and use in source and binary forms, with or without modification,\n5: are permitted provided that the following conditions are met:\n6: \n7: 1. Redistributions of source code must retain the above copyright notice, this\n8: list of conditions and the following disclaimer.\n9: \n10: 2. Redistributions in binary form must reproduce the above copyright notice,\n"
+ },
+ {
+  "step": 4,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe_utils.c",
+   "offset": 200,
+   "limit": 80
+  },
+  "result": "<file yara/libyara/modules/pe_utils.c lines 200-280>\n200:   // relative to ImageBase.\n201: \n202:   if (rva < lowest_section_rva)\n203:   {\n204:     section_rva = 0;\n205:     section_offset = 0;\n206:     section_raw_size = (DWORD) pe->data_size;\n207:   }\n208: \n209:   // Many sections, have a raw (on disk) size smaller than their in-memory size.\n210:   // Check for rva's that map to this sparse space, and therefore have no valid\n211:   // associated file offset.\n212: \n213:   if ((rva - section_rva)"
+ },
+ {
+  "step": 5,
+  "tool": "grep",
+  "args": {
+   "pattern": "define pe__load|int pe__load|void pe__load|pe__load"
+  },
+  "result": "<grep 'define pe__load|int pe__load|void pe__load|pe__load': 0 matches>\n(no matches)"
+ },
+ {
+  "step": 5,
+  "tool": "grep",
+  "args": {
+   "pattern": "IMAGE_EXPORT_DIRECTORY|typedef.*IMAGE_EXPORT_DIRECTORY|NumberOfFunctions"
+  },
+  "result": "<grep 'IMAGE_EXPORT_DIRECTORY|typedef.*IMAGE_EXPORT_DIRECTORY|NumberOfFunctions': 6 matches>\nyara/libyara/modules/pe.c:948: PIMAGE_EXPORT_DIRECTORY exports;\nyara/libyara/modules/pe.c:975: exports = (PIMAGE_EXPORT_DIRECTORY) (pe->data + offset);\nyara/libyara/modules/pe.c:977: if (!struct_fits_in_pe(pe, exports, IMAGE_EXPORT_DIRECTORY))\nyara/libyara/modules/pe.c:985: if (yr_le32toh(exports->NumberOfFunctions) > MAX_PE_EXPORTS ||\nyara/libyara/modules/pe.c:986: yr_le32toh(exports->NumberOfFunctions)"
+ },
+ {
+  "step": 5,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/include/yara/pe.h",
+   "offset": 1,
+   "limit": 250
+  },
+  "result": "<file yara/libyara/include/yara/pe.h lines 1-201>\n1: /*\n2: Copyright (c) 2013. The YARA Authors. All Rights Reserved.\n3: \n4: Redistribution and use in source and binary forms, with or without modification,\n5: are permitted provided that the following conditions are met:\n6: \n7: 1. Redistributions of source code must retain the above copyright notice, this\n8: list of conditions and the following disclaimer.\n9: \n10: 2. Redistributions in binary form must reproduce the above copyright notice,\n11: th"
+ },
+ {
+  "step": 6,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/tests/oss-fuzz/pe_fuzzer.cc",
+   "offset": 1,
+   "limit": 100
+  },
+  "result": "<file yara/tests/oss-fuzz/pe_fuzzer.cc lines 1-101>\n1: /*\n2: Copyright (c) 2017. The YARA Authors. All Rights Reserved.\n3: \n4: Redistribution and use in source and binary forms, with or without modification,\n5: are permitted provided that the following conditions are met:\n6: \n7: 1. Redistributions of source code must retain the above copyright notice, this\n8: list of conditions and the following disclaimer.\n9: \n10: 2. Redistributions in binary form must reproduce the above copyright notice,\n11: "
+ },
+ {
+  "step": 6,
+  "tool": "grep",
+  "args": {
+   "pattern": "define module_load|module_load|MODULE_NAME pe|pe__load"
+  },
+  "result": "<grep 'define module_load|module_load|MODULE_NAME pe|pe__load': 11 matches>\nyara/libyara/modules/pe.c:56: #define MODULE_NAME pe\nyara/libyara/modules/pe.c:2288: int module_load(\nyara/libyara/modules/math.c:626: int module_load(\nyara/libyara/modules/dotnet.c:1670: int module_load(\nyara/libyara/modules/cuckoo.c:280: int module_load(\nyara/libyara/modules/hash.c:536: int module_load(\nyara/libyara/modules/time.c:66: int module_load(\nyara/libyara/modules/tests.c:163: int module_load(\nyara/libyara/modu"
+ },
+ {
+  "step": 6,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe.c",
+   "offset": 2560,
+   "limit": 120
+  },
+  "result": "<file yara/libyara/modules/pe.c lines 2560-2680>\n2560:       \"RESOURCE_TYPE_VERSION\");\n2561:   set_integer(\n2562:       RESOURCE_TYPE_DLGINCLUDE, module_object,\n2563:       \"RESOURCE_TYPE_DLGINCLUDE\");\n2564:   set_integer(\n2565:       RESOURCE_TYPE_PLUGPLAY, module_object,\n2566:       \"RESOURCE_TYPE_PLUGPLAY\");\n2567:   set_integer(\n2568:       RESOURCE_TYPE_VXD, module_object,\n2569:       \"RESOURCE_TYPE_VXD\");\n2570:   set_integer(\n2571:       RESOURCE_TYPE_ANICURSOR, module_object,\n2572:       \""
+ },
+ {
+  "step": 7,
+  "tool": "grep",
+  "args": {
+   "pattern": "IMAGE_OPTIONAL_HEADER32|typedef struct _IMAGE_OPTIONAL_HEADER|DataDirectory|IMAGE_SECTION_HEADER",
+   "path": "yara/libyara/include/yara/pe.h"
+  },
+  "result": "<grep 'IMAGE_OPTIONAL_HEADER32|typedef struct _IMAGE_OPTIONAL_HEADER|DataDirectory|IMAGE_SECTION_HEADER': 12 matches>\nyara/libyara/exefiles.c:76: headers_size += sizeof(IMAGE_OPTIONAL_HEADER32);\nyara/libyara/exefiles.c:98: PIMAGE_SECTION_HEADER section;\nyara/libyara/exefiles.c:109: (uint8_t*) pe_header + sizeof(IMAGE_SECTION_HEADER) < buffer_length)\nyara/libyara/modules/pe.c:1289: PIMAGE_SECTION_HEADER section;\nyara/libyara/modules/pe.c:1383: if (!struct_fits_in_pe(pe, section, IMAGE_SECTION_HEA"
+ },
+ {
+  "step": 8,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/include/yara/pe.h",
+   "offset": 250,
+   "limit": 200
+  },
+  "result": "<file yara/libyara/include/yara/pe.h lines 250-450>\n250:     DWORD NumberOfRvaAndSizes;\n251:     IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];\n252: \n253: } IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;\n254: \n255: \n256: typedef struct _IMAGE_OPTIONAL_HEADER64 {\n257:     WORD Magic;\n258:     BYTE MajorLinkerVersion;\n259:     BYTE MinorLinkerVersion;\n260:     DWORD SizeOfCode;\n261:     DWORD SizeOfInitializedData;\n262:     DWORD SizeOfUninitializedData;\n263:     DWORD "
+ },
+ {
+  "step": 9,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/include/yara/pe.h",
+   "offset": 210,
+   "limit": 45
+  },
+  "result": "<file yara/libyara/include/yara/pe.h lines 210-255>\n210: #define IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT   11   // Bound Import Directory in headers\n211: #define IMAGE_DIRECTORY_ENTRY_IAT            12   // Import Address Table\n212: #define IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT   13   // Delay Load Import Descriptors\n213: #define IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR 14   // COM Runtime descriptor\n214: \n215: \n216: //\n217: // Optional header format.\n218: //\n219: \n220: typedef struct _IMAGE_OPTIONAL_HEADER"
+ },
+ {
+  "step": 10,
+  "tool": "grep",
+  "args": {
+   "pattern": "typedef struct.*PE|struct.*PE|header64|IS_64BITS_PE",
+   "path": "yara/libyara/include/yara/pe_utils.h"
+  },
+  "result": "<grep 'typedef struct.*PE|struct.*PE|header64|IS_64BITS_PE': 26 matches>\nyara/libyara/grammar.c:1323: yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, void *yyscanner, YR_COMPILER* compiler)\nyara/libyara/exefiles.c:353: elf64_header_t* elf_header64;\nyara/libyara/exefiles.c:375: elf_header64 = (elf64_header_t*) buffer;\nyara/libyara/exefiles.c:377: elf_header64,\nyara/libyara/exefiles.c:378: yr_le64toh(elf_header64->entry),\nyara/libyara/exefiles.c:394: elf64_header_t* elf_header64;\nyar"
+ },
+ {
+  "step": 10,
+  "tool": "grep",
+  "args": {
+   "pattern": "IS_64BITS_PE"
+  },
+  "result": "<grep 'IS_64BITS_PE': 5 matches>\nyara/libyara/modules/pe.c:689: if (IS_64BITS_PE(pe))\nyara/libyara/modules/pe.c:1320: IS_64BITS_PE(pe) ?\nyara/libyara/modules/pe.c:1874: return_integer(IS_64BITS_PE(pe) ? 0 : 1);\nyara/libyara/modules/pe.c:1886: return_integer(IS_64BITS_PE(pe) ? 1 : 0);\nyara/libyara/modules/pe_utils.c:125: if (IS_64BITS_PE(pe))"
+ },
+ {
+  "step": 11,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/include/yara/pe_utils.h",
+   "offset": 1,
+   "limit": 140
+  },
+  "result": "<file yara/libyara/include/yara/pe_utils.h lines 1-141>\n1: #ifndef YR_PE_UTILS_H\n2: #define YR_PE_UTILS_H\n3: \n4: #include <yara/pe.h>\n5: \n6: #define MAX_PE_SECTIONS              96\n7: \n8: \n9: #define IS_64BITS_PE(pe) \\\n10:     (yr_le16toh(pe->header64->OptionalHeader.Magic) == IMAGE_NT_OPTIONAL_HDR64_MAGIC)\n11: \n12: \n13: #define OptionalHeader(pe,field)                \\\n14:   (IS_64BITS_PE(pe) ?                           \\\n15:    pe->header64->OptionalHeader.field :         \\\n16:    pe->header->"
+ },
+ {
+  "step": 12,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe.c",
+   "offset": 2288,
+   "limit": 30
+  },
+  "result": "<file yara/libyara/modules/pe.c lines 2288-2318>\n2288: int module_load(\n2289:     YR_SCAN_CONTEXT* context,\n2290:     YR_OBJECT* module_object,\n2291:     void* module_data,\n2292:     size_t module_data_size)\n2293: {\n2294:   YR_MEMORY_BLOCK* block;\n2295:   YR_MEMORY_BLOCK_ITERATOR* iterator = context->iterator;\n2296: \n2297:   PIMAGE_NT_HEADERS32 pe_header;\n2298:   const uint8_t* block_data = NULL;\n2299:   PE* pe = NULL;\n2300: \n2301:   set_integer(\n2302:       IMAGE_FILE_MACHINE_UNKNOWN, module_ob"
+ },
+ {
+  "step": 13,
+  "tool": "read_file",
+  "args": {
+   "path": "yara/libyara/modules/pe.c",
+   "offset": 850,
+   "limit": 80
+  },
+  "result": "<file yara/libyara/modules/pe.c lines 850-930>\n850: \n851:   return (l > 0 && l < n);\n852: }\n853: \n854: \n855: //\n856: // Walk the imports and collect relevant information. It is used in the\n857: // \"imports\" function for comparison and in the \"imphash\" function for\n858: // calculation.\n859: //\n860: \n861: IMPORTED_DLL* pe_parse_imports(\n862:     PE* pe)\n863: {\n864:   int64_t offset;\n865:   int num_imports = 0;\n866: \n867:   IMPORTED_DLL* head = NULL;\n868:   IMPORTED_DLL* tail = NULL;\n869: \n870:   P"
+ }
+]
